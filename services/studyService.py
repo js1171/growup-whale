@@ -52,13 +52,13 @@ def studyCheck(db, User, required_exp, studyType, user_email) :
     curExp = 0 if not user_list.whale.exp else user_list.whale.exp
     total_exp = curExp + 1
     level = int(user_list.whale.level)
+    whale_list = user_list.whale
     if(required_exp <= total_exp):
         level += 1
+        whale_list.job = job
 
     # job, 경험치, 레벨 DB에 기록 (whale -> level, exp)
-    whale_list = user_list.whale
     whale_list.level = level
-    whale_list.job = job
     whale_list.exp = total_exp
     db.session.add(whale_list)
     db.session.commit()
